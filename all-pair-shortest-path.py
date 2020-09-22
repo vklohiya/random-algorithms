@@ -61,15 +61,18 @@ def floydWarshall(adjMatrix, N):
 
 if __name__ == '__main__':
     # Number of vertices in the adjMatrix
-    N = 4
+    N = 6
     M = float('inf')
 
     # given adjacency representation of matrix
     adjMatrix = [
-        [0, M, 3, M],
-        [2, 0, M, M],
-        [M, 7, 0, 1],
-        [6, M, M, 0]
+        [0, M, M, M, -1, M],
+        [1, 0, M, 2, M, M],
+        [M, 2, 0, M, M, -8],
+        [-4, M, M, 0, 3, M],
+        [M, 7, M, M, 0, M],
+        [M, 5, 10, M, M, 0]
+
     ]
 
     # Run Floyd Warshall algorithm
