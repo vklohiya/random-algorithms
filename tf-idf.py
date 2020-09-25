@@ -3,10 +3,15 @@ import pandas as pd
 import math
 from scipy import spatial
 
-all_doc = [["Computer Networks", "Multimedia", "Database"],
-           ["Computer Networks", "Multimedia", "OS"],
-           ["Dataware Housing", "Datamining", "Database"],
-           ]
+str1 = "Kiran studies about Data Science in Bits Pilani".split()
+str2 = "Priya works at Anna University".split()
+str3 = "Bigdata-Developers work on large datasets".split()
+
+all_doc = [str1, str2, str3]
+#all_doc = [["Computer Networks", "Multimedia", "Database"],
+#           ["Computer Networks", "Multimedia", "OS"],
+#           ["Dataware Housing", "Datamining", "Database"],
+#           ]
 wordDict = []
 total = []
 
@@ -87,19 +92,20 @@ idf = []
 for i in range(0, len(all_doc)):
     idf.append(computeTFIDF(tf[i], idfs, i))
 
-# Computing TF-ID for query
-wordDictQ = dict.fromkeys(total, 0)
-for word in query:
-    wordDictQ[word] += 1
+def call_query():
+    # Computing TF-ID for query
+    wordDictQ = dict.fromkeys(total, 0)
+    for word in query:
+        wordDictQ[word] += 1
 
-tfquery = computeTF(wordDictQ, query, "query")
-query_idf = computeTFIDF(tfquery, idfs, "query")
+    tfquery = computeTF(wordDictQ, query, "query")
+    query_idf = computeTFIDF(tfquery, idfs, "query")
 
-# Test similarity with query document
-def computeSimimalaity(vector1, vector2, index):
-    distance = 1 - spatial.distance.cosine(list(vector1.values()), list(vector2.values()))
-    print(f"Cosine Similarity for Document-{index} and Query = {distance}")
+    # Test similarity with query document
+    def computeSimimalaity(vector1, vector2, index):
+        distance = 1 - spatial.distance.cosine(list(vector1.values()), list(vector2.values()))
+        print(f"Cosine Similarity for Document-{index} and Query = {distance}")
 
 
-for i in range(0, len(all_doc)):
-    computeSimimalaity(idf[i], query_idf, i)
+    for i in range(0, len(all_doc)):
+        computeSimimalaity(idf[i], query_idf, i)
